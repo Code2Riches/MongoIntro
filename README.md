@@ -101,7 +101,7 @@ const nine =	{
 	 "id": "01ed79b1-75c2-44e5-becb-10788158a7db",
 	 "objectId": 9
 	}
-    
+
 const ten =	{
 	 "createdAt": new Date("2022-01-14T15:07:41.214Z"),
 	 "title": "aliquam",
@@ -115,3 +115,17 @@ const ten =	{
 
 db.blogs.insertMany([one, two, three, four, five, six, seven, eight, nine, ten])
 
+- Insert a new blog into the collection
+  const eleven = {
+	 "createdAt": new Date("2022-04-16T06:33:29.080Z"),
+	 "title": "F1_degen",
+	 "text": "LMAO - Get it done!",
+	 "author": "Christian Benites",
+	 lastModified: new Date(),
+	 "categories": ["speed", "quali", "win"],
+	 "id": "dcc2102d-a20a-4765-8dc4-9079af4vsc96",
+	 "objectId": 11
+	}
+	db.blogs.insertOne(eleven)
+
+    
