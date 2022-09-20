@@ -128,4 +128,13 @@ db.blogs.insertMany([one, two, three, four, five, six, seven, eight, nine, ten])
 	}
 	db.blogs.insertOne(eleven)
 
-    
+    - Find one blog by author
+    db.blogs.find({
+    author: "Christian Benites"
+})
+   .projection({})
+   .sort({_id:-1})
+   .limit(100)
+
+   
+
