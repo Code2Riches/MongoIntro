@@ -159,3 +159,7 @@ db.blogs.find({
 db.blogs.find({
     lastModified: {$exists: false}
 
+- Find all blogs where the createdAt type is a date
+db.blogs.find({
+    createdAt: {$type: "date"}
+
