@@ -169,3 +169,18 @@ db.blogs.find({
     createdAt: {$type: "date"}
 })
 
+- Strecth/Find soecific phrase
+db.blogs.find({
+    text: {
+    $regex: /LMAO - Get it done!/
+    }
+})
+
+- Stretch/Find all "qui"
+db.blogs.find({
+    categories: {
+    $regex: /qui/
+    }
+})
+
+
