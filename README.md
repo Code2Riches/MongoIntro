@@ -163,3 +163,9 @@ db.blogs.find({
 db.blogs.find({
     createdAt: {$type: "date"}
 
+- Combine the above two queries into one to find all blogs in which lastModified does not exist and createdAt is the type date
+db.blogs.find({
+    lastModified: {$exists: false},
+    createdAt: {$type: "date"}
+})
+
