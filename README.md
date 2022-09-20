@@ -128,7 +128,7 @@ db.blogs.insertMany([one, two, three, four, five, six, seven, eight, nine, ten])
 	}
 	db.blogs.insertOne(eleven)
 
-    - Find one blog by author
+- Find one blog by author
     db.blogs.find({
     author: "Christian Benites"
 })
@@ -136,5 +136,16 @@ db.blogs.insertMany([one, two, three, four, five, six, seven, eight, nine, ten])
    .sort({_id:-1})
    .limit(100)
 
-   
+- Find all blogs whose objectId is greater than 5
+db.blogs.find({
+   objectId: {
+        $gt: 5
+    }
+})
+//   .projection({})
+//   .sort({_id:-1})
+//   .limit(100)
+
+
+
 
