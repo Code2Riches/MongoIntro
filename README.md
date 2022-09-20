@@ -146,6 +146,15 @@ db.blogs.find({
 //   .sort({_id:-1})
 //   .limit(100)
 
+- Find all blogs whose createdAt is after April 1, 2022
+db.blogs.find({
+    createdAt: {
+        $gt: new Date("04/01/22")
+    }
+})
+//   .projection({})
+//   .sort({_id:-1})
+//   .limit(100)
 
 
 
