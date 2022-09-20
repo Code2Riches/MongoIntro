@@ -152,9 +152,10 @@ db.blogs.find({
         $gt: new Date("04/01/22")
     }
 })
-//   .projection({})
-//   .sort({_id:-1})
-//   .limit(100)
 
+********************** PART - 2 *******************
 
+- Missing Field lastModified
+db.blogs.find({
+    lastModified: {$exists: false}
 
