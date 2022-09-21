@@ -179,7 +179,7 @@ db.blogs.find({
 - Stretch/Find all "qui"
 db.blogs.find({
     categories: {
-    $regex: /qui/
+    $in: ["qui"] 
     }
 })
 
