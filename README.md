@@ -3,6 +3,7 @@ MongoIntro
 
 // const blogs = [one, two, three, four, five, six, seven, eight, nine, ten]; 
 
+- Insert Sample blogs (10)
 const one = {
 	 "createdAt": new Date("2022-04-16T06:33:29.080Z"),
 	 "title": "fugiat",
@@ -116,7 +117,7 @@ const ten =	{
 db.blogs.insertMany([one, two, three, four, five, six, seven, eight, nine, ten])
 
 - Insert a new blog into the collection
-  const eleven = {
+const eleven = {
 	 "createdAt": new Date("2022-04-16T06:33:29.080Z"),
 	 "title": "F1_degen",
 	 "text": "LMAO - Get it done!",
@@ -132,9 +133,9 @@ db.blogs.insertMany([one, two, three, four, five, six, seven, eight, nine, ten])
     db.blogs.find({
     author: "Christian Benites"
 })
-   .projection({})
-   .sort({_id:-1})
-   .limit(100)
+// .projection({})
+// .sort({_id:-1})
+// .limit(100)
 
 - Find all blogs whose objectId is greater than 5
 db.blogs.find({
@@ -183,4 +184,57 @@ db.blogs.find({
     }
 })
 
+********************** PART - 3 *******************
 
+- Find all blogs in which the lastModified does not exist and set it
+
+// db.blogs.find({
+//     lastModified: {
+//         $exists: false
+//     }
+// })
+
+db.blogs.updateMany({
+    lastModified: {
+        $exists: false
+    }
+},{
+$set: {lastModified: new Date()}
+})
+
+** From now on, all the following queries should update lastModified to be the current datetime **
+
+- Find all blogs created after May 2022 and add "lorem" as a new category in the categories array
+
+db.blogs.find({
+    createdAt: {
+        $gt: new Date("05/01/2022")
+    }
+})
+
+db.blogs.updateMany({
+    createdAt: {$gt: new Date("May 2022")}},
+    {$addToSet: {categories: "lorem"},
+    $set: {lastModified: new Date()}})
+
+- Find all blogs that have the category "voluptas" and pull "voluptas" from the categories
+
+db.blogs.find({
+    categories: {$in: ["voluptas"]}
+})
+
+db.blogs.updateMany({
+    categories: {$in: ["voluptas"]}},
+    {$pull: {categories: ["voluptas"]},
+    $set: {lastModified: new Date()}})
+
+- Find all blogs with "corrupti" in the categories and delete those blogs
+
+db.blogs.find({
+    categories: {$in: ["corrupti"]}
+})
+
+db.blogs.deleteMany({
+    categories: {$in: ["corrupti"]}})
+
+    

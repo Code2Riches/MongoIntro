@@ -131,3 +131,45 @@
 	- Behind the scenes, every date object is just a UNIX Timestamp
 	- A UNIX Timestamp is calculated by the amount of milliseconds that have occurred after January 01, 1970
 	- For every date after the current date will be a larger/greater UNIX timestamp and every date before the current date will be a smaller/lower UNIX timestamp
+
+    # MongoDB Notes - Day 3
+
+## Updating Documents
+- The two primary methods for updating documents in the database is .updateMany() for multiple document updates and .updateOne() for a single document update
+- The .update methods take two object arguments, the query object and the update object
+	- The query object is the first argument and is where you write the query for the documents you want to find and update
+	- The update object is the second argument and defines the operations you want mongo to execute to update the found document/documents. The update object has several update operators.
+- Field Update Operators
+	- $set
+		- $set will overwrite the specified field with the new value given. The value for $set will be an object, the keys will be the fields on the document you want to update and the values will be the new values for those fields. E.G. To set the field firstName, the update object would be:
+			- {
+				$set: {
+					firstName: "James"
+				}
+			}
+		- _Note_: $set will set the value for a field regardless of whether or not the field existed on the object before the update. I.E. we can use $set to update either an existing field or make a new field on the document.
+- Array Update Operators
+	- $push/$pull
+		- $push and $pull work similarly to how the JS .push() and .pop()(like .pop but for an item in any position in the array) methods work where you can push a new value onto an array of values or you can remove a value from the array. E.G. To push a new movie onto the favoriteMovies array you would do:
+			- {
+				$push: {
+					favoriteMovies: "Alien"
+				}
+			}
+		- _Note_: $pull has the same syntax as $push
+	- $addToSet
+		- $addToSet works like $push except it will NOT push a duplicate value into the array
+	- $each
+		- For pushing in an array of items into an array, we use $each to loop through the given array of values and push each one in turn
+			- {
+				$addToSet: {
+					favoriteMovies: {
+						$each: ["Sunshine", "Fight Club"]
+					}
+				}
+			}
+## Deleting Documents
+- The two primary methods for deleting objects are .deleteOne() and .deleteMany()
+	- These two methods only take a single argument which will be the query object. Once executed, the delete methods will find any documents matching the query and delete them.
+
+- _Note_: All methods that specifically match a single document such as updateOne and deleteOne will match the first document found and run the operation. If there are multiple matching documents and a sort criteria is not defined, mongo will find the first one at "random"
